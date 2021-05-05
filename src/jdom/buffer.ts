@@ -21,6 +21,8 @@ export enum NumberFormat {
     UInt64BE = 18,
     Int64LE = 19,
     Int64BE = 20,
+
+    UInt24LE = 21,
 }
 
 function fmtInfoCore(fmt: NumberFormat) {
@@ -33,6 +35,8 @@ function fmtInfoCore(fmt: NumberFormat) {
             return -2
         case NumberFormat.UInt16LE:
             return 2
+        case NumberFormat.UInt24LE:
+            return 3
         case NumberFormat.Int32LE:
             return -4
         case NumberFormat.UInt32LE:
@@ -110,6 +114,8 @@ export function sizeOfNumberFormat(format: NumberFormat) {
         case NumberFormat.Int16BE:
         case NumberFormat.UInt16BE:
             return 2
+        case NumberFormat.UInt24LE:
+            return 3
         case NumberFormat.Int32LE:
         case NumberFormat.Int32BE:
         case NumberFormat.UInt32BE:
@@ -144,6 +150,8 @@ export function getNumber(
             return read16(buf, offset)
         case NumberFormat.Int16LE:
             return (read16(buf, offset) << 16) >> 16
+        case NumberFormat.UInt24LE:
+            return (buf[offset] << 16) | read16(buf, offset + 1)
         case NumberFormat.UInt32LE:
             return read32(buf, offset)
         case NumberFormat.Int32LE:

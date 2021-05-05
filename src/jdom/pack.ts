@@ -21,6 +21,7 @@ The following type descriptions are supported:
 
 * `u8`, `u16`, `u32` - unsigned, 1, 2, and 4 bytes long respectively
 * `i8`, `i16`, `i32` - similar, but signed
+* `rgb`, 3 bytes long RGB color
 * `b` - buffer until the end of input (has to be last)
 * `s` - similar, but utf-8 encoded string
 * `z` - NUL-terminated utf-8 string
@@ -72,6 +73,8 @@ function numberFormatOfType(tp: string): NumberFormat {
             return NumberFormat.Int64LE
         case "u64":
             return NumberFormat.UInt64LE
+        case "rgb":
+            return NumberFormat.UInt24LE
         default:
             return null
     }
