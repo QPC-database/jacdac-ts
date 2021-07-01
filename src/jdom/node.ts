@@ -47,7 +47,7 @@ export abstract class JDNode extends JDEventSource {
     emitPropagated(event: string, ...args: any[]) {
         let current = this as JDNode
         while (current) {
-            current.emit(event, args)
+            current.emit(event, ...args)
             current = current.parent
         }
     }
